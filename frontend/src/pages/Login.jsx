@@ -17,7 +17,7 @@ const Login = () => {
         setIsLoading(true);
         try {
             const user = await login({ email, password });
-            navigate(user.role === 'farmer' ? '/farmer' : '/expert');
+            navigate('/');
         } catch (err) {
             setError('Invalid email or password');
         } finally {

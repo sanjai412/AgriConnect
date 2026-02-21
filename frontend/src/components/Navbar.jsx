@@ -30,10 +30,6 @@ const Navbar = () => {
 
                     {user ? (
                         <>
-                            <Link to={user.role === 'farmer' ? '/farmer' : '/expert'} className="flex items-center gap-2 font-medium text-muted hover:text-green-600 transition-colors">
-                                <LayoutDashboard size={20} />
-                                <span>Dashboard</span>
-                            </Link>
                             <Link to="/profile" className="flex items-center gap-2 font-medium text-muted hover:text-green-600 transition-colors">
                                 <User size={20} />
                                 <span>{user.name}</span>

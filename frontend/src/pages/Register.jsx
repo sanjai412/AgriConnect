@@ -19,7 +19,7 @@ const Register = () => {
         setIsLoading(true);
         try {
             const user = await register(formData);
-            navigate(user.role === 'farmer' ? '/farmer' : '/expert');
+            navigate('/');
         } catch (err) {
             alert('Registration failed');
         } finally {

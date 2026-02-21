@@ -10,9 +10,19 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
+            console.log('Token found, fetching profile...');
             api.get('/users/profile')
-                .then(res => setUser(res.data))
-                .catch(() => localStorage.removeItem('token'))
+                .then(res => {
+                    console.log('Profile fetched successfully');
+                    setUser(res.data);
+                })
+                .catch(err => {
+                    console.error('Profile fetch failed:', err.response?.data || err.message);
+                    if (err.response?.status === 401) {
+                        localStorage.removeItem('token');
+                        setUser(null);
+                    }
+                })
                 .finally(() => setLoading(false));
         } else {
             setLoading(false);
