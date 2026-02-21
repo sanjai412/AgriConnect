@@ -1,0 +1,11 @@
+{
+    "name": "agriconnect",
+    "version": "1.0.0",
+    "scripts": {
+        "start:backend": "cd backend && npm start",
+        "start:frontend": "cd frontend && npm run dev",
+        "dev": "npm run start:frontend",
+        "setup": "cd backend && npm install && cd ../frontend && npm install",
+        "db:setup": "cd backend && node setup_db.js"
+    }
+}
