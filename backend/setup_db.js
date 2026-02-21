@@ -86,10 +86,10 @@ async function setup() {
       INSERT INTO roles (name) VALUES ('farmer'), ('student'), ('expert'), ('admin')
       ON CONFLICT (name) DO NOTHING;
 
-      INSERT INTO learning_resources (title, content, category, language) VALUES
-      ('Organic Pest Control', 'Detailed guide on using neem oil and organic sprays.', 'Tips', 'en'),
-      ('Sustainable Irrigation', 'How to set up drip irrigation for vegetable farms.', 'Tutorial', 'en'),
-      ('Soil Health 101', 'Understanding pH and NPK levels in your soil.', 'Tutorial', 'hi')
+      INSERT INTO learning_resources (title, content, category) VALUES
+      ('Organic Pest Control', 'Detailed guide on using neem oil and organic sprays.', 'Tips'),
+      ('Sustainable Irrigation', 'How to set up drip irrigation for vegetable farms.', 'Tutorial'),
+      ('Soil Health 101', 'Understanding pH and NPK levels in your soil.', 'Tutorial')
       ON CONFLICT DO NOTHING;
     `);
 

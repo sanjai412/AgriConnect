@@ -9,8 +9,7 @@ const CreateQuery = () => {
         description: '',
         crop_type: '',
         issue_type: '',
-        location: '',
-        language: 'en'
+        location: ''
     });
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -77,19 +76,6 @@ const CreateQuery = () => {
                             value={formData.crop_type}
                             onChange={e => setFormData({ ...formData, crop_type: e.target.value })}
                         />
-                    </div>
-                    <div className="card">
-                        <label className="block text-sm font-semibold mb-2">Preferred Language</label>
-                        <select
-                            className="input-field"
-                            value={formData.language}
-                            onChange={e => setFormData({ ...formData, language: e.target.value })}
-                        >
-                            <option value="en">English</option>
-                            <option value="hi">Hindi (हिन्दी)</option>
-                            <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
-                            <option value="te">Telugu (తెలుగు)</option>
-                        </select>
                     </div>
                 </div>
 

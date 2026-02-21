@@ -1,117 +1,80 @@
+@import "tailwindcss";
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --primary: #2e7d32;
-  --primary-light: #4caf50;
-  --secondary: #ffa000;
-  --accent: #ff5722;
-  --background: #f8fcf9;
-  --card-bg: #ffffff;
-  --text-main: #1a2e1c;
-  --text-muted: #667c69;
-  --border: #e0ece2;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --radius: 16px;
+@theme {
+  --color-primary: #2e7d32;
+  --color-primary-light: #4caf50;
+  --color-secondary: #ffa000;
+  --color-accent: #ff5722;
+  --color-background: #f8fcf9;
+  --color-card-bg: #ffffff;
+  --color-main: #1a2e1c;
+  --color-muted: #667c69;
+  --color-border: #e0ece2;
+
+  --radius-premium: 16px;
+
+  --shadow-premium: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+  --font-outfit: 'Outfit', sans-serif;
 }
 
-[data-theme='dark'] {
-  --primary: #4caf50;
-  --primary-light: #81c784;
-  --secondary: #ffb300;
-  --accent: #ff7043;
-  --background: #0d1a0e;
-  --card-bg: #162618;
-  --text-main: #f0f7f1;
-  --text-muted: #94a396;
-  --border: #263829;
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    @apply font-outfit bg-background text-main overflow-x-hidden;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  button {
+    @apply cursor-pointer border-none rounded-premium font-semibold;
+    font-family: inherit;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  button:active {
+    @apply scale-95;
+  }
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/30;
+  }
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background-color: var(--background);
-  color: var(--text-main);
-  transition: background-color 0.3s, color 0.3s;
-  overflow-x: hidden;
-}
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  }
 
-button {
-  cursor: pointer;
-  border: none;
-  border-radius: var(--radius);
-  font-family: inherit;
-  font-weight: 600;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
+  .card {
+    @apply bg-card-bg rounded-premium p-6 border border-border;
+    box-shadow: var(--shadow-premium);
+  }
 
-button:active {
-  transform: scale(0.96);
-}
+  .input-field {
+    @apply w-full p-4 rounded-xl border-2 border-border bg-card-bg text-main text-base outline-none transition-colors focus:border-primary;
+  }
 
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
+  .btn-primary {
+    @apply bg-primary text-white py-4 px-8 font-bold;
+    box-shadow: 0 4px 14px 0 rgba(46, 125, 50, 0.39);
+  }
 
-[data-theme='dark'] .glass {
-  background: rgba(22, 38, 24, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
+  .btn-primary:hover {
+    @apply bg-primary-light;
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.23);
+  }
 
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-}
-
-.input-field {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 12px;
-  border: 2px solid var(--border);
-  background: var(--card-bg);
-  color: var(--text-main);
-  font-size: 1rem;
-  transition: border-color 0.2s;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: var(--primary);
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 4px 14px 0 rgba(46, 125, 50, 0.39);
-}
-
-.btn-primary:hover {
-  background: var(--primary-light);
-  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.23);
-}
-
-.btn-secondary {
-  background: var(--secondary);
-  color: #1a2e1c;
-  padding: 1rem 2rem;
+  .btn-secondary {
+    @apply bg-secondary text-main py-4 px-8 font-bold;
+  }
 }
 
 /* Animations */
@@ -129,4 +92,25 @@ button:active {
 
 .animate-fade {
   animation: fadeIn 0.4s ease forwards;
+}
+
+/* Dark Mode support using class or system */
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@layer base {
+  [data-theme='dark'] {
+    --color-primary: #4caf50;
+    --color-primary-light: #81c784;
+    --color-secondary: #ffb300;
+    --color-accent: #ff7043;
+    --color-background: #0d1a0e;
+    --color-card-bg: #162618;
+    --color-main: #f0f7f1;
+    --color-muted: #94a396;
+    --color-border: #263829;
+  }
+
+  [data-theme='dark'] .glass {
+    @apply bg-[#162618]/70 border-white/5;
+  }
 }
