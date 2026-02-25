@@ -4,9 +4,7 @@ const dotenv = require('dotenv');
 const http = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
-
 dotenv.config();
-
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -14,9 +12,7 @@ const io = new Server(server, {
         origin: '*', // For development, allow all
         methods: ['GET', 'POST'],
     },
-});
-
-// Middleware
+});// Middleware
 app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true,
